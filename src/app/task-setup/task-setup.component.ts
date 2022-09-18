@@ -35,6 +35,8 @@ export class TaskSetupComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTasksall();
+    this.getTasksComplete();
+    this.getTasksIncomplete();
   }
 
   logout(){
