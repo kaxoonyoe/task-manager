@@ -38,7 +38,7 @@ export class UpdateStatusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.taskId = this.data;
     this.scheduledDate = this.today;
     this.completionDate = this.today;
   }

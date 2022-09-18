@@ -15,7 +15,7 @@ export class EditTaskComponent implements OnInit {
 
   public form: FormGroup;
   today = new Date();
-  scheduledDate: any;
+  scheduled_date: any;
   completionDate: any;
 
   taskId: any;
@@ -30,9 +30,9 @@ export class EditTaskComponent implements OnInit {
   ) { 
     this.form = this.fb.group(
       {
-        title: [null],
-        priority: [null],
-        scheduled_date: [null],
+        title: ['',Validators.required],
+        priority: ['',Validators.required],
+        scheduled_date: [''],
       }
     );
   }
@@ -42,10 +42,7 @@ export class EditTaskComponent implements OnInit {
       this.taskId = this.data;
       this.getTaskById();
     }
-    
-
-    this.scheduledDate = this.today;
-    this.completionDate = this.today;
+    // this.scheduled_date = this.today;
   }
   cancel() {
     this.dialogRef.close();
@@ -67,6 +64,10 @@ export class EditTaskComponent implements OnInit {
     this.taskService.GetTaskById(this.taskId).subscribe(x => {
       if(x){
         this.task = x.data;
+        this.form.controls['title'].setValue(x.data.title);
+        this.form.controls['priority'].setValue(x.data.priority);
+        this.form.controls['scheduled_date'].setValue(x.data.scheduled_date);
+        this.scheduled_date = x.data.scheduled_date;
       }
     });
   }

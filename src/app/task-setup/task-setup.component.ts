@@ -113,11 +113,11 @@ export class TaskSetupComponent implements OnInit {
   }
   delete(id: any) {
     this.taskService.DeleteTask(id).subscribe((x) => {
-      if (x.success == true) {
-        alertify.success(x.message);
+      if (x.success) {
+        alertify.success('Delete Successfully!');
         this.ngOnInit();
       } else {
-        alertify.error(x.message);
+        alertify.error('Error!');
       }
     });
   }

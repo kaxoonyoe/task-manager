@@ -30,20 +30,14 @@ export class CreateTaskComponent implements OnInit {
   ) { 
     this.form = this.fb.group(
       {
-        title: [null],
-        priority: [null],
+        title: ['',Validators.required],
+        priority: ['',Validators.required],
         scheduled_date: [null],
       }
     );
   }
 
   ngOnInit(): void {
-    if(this.data != ''){
-      this.taskId = this.data;
-      this.getTaskById();
-    }
-    
-
     this.scheduled_date = this.today;
     this.completionDate = this.today;
   }

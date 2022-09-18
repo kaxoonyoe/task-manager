@@ -63,8 +63,8 @@ export class TaskService {
   }
 
   UpdateStatus(id: any){
-    return this.http.post<any>(
-      this.apiUrl+`tasks/update-status`,id
+    return this.http.put<any>(
+      this.apiUrl+`tasks/update-status/`+id,id
     );
   }
 

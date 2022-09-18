@@ -6,7 +6,7 @@ import { CreateTaskComponent } from './task-setup/create-task/create-task.compon
 import { TaskSetupComponent } from './task-setup/task-setup.component';
 
 const routes: Routes = [
-  { path:'',component:LoginComponent},
+  { path:'login',component:LoginComponent},
   { path:'task',component:TaskSetupComponent , canActivate:[AuthGuard]},
 ];
 

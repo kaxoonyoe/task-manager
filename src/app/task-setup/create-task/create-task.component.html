@@ -10,13 +10,13 @@
         <div class="row">
 
             <mat-form-field class="col-sm-6">
-                <mat-label>Title&nbsp;<span style="color: red;">*</span></mat-label>
+                <mat-label>Title</mat-label>
                 <input matInput type="text" formControlName="title"/>
             </mat-form-field>
           
       
           <mat-form-field class="col-sm-6">
-            <mat-label>Priority&nbsp;<span style="color: red;">*</span></mat-label>
+            <mat-label>Priority</mat-label>
             <mat-select
               formControlName="priority"
             >
@@ -35,6 +35,7 @@
               placeholder="Scheduled Date"
               [matDatepicker]="scheduleDatePicker"
               [(ngModel)]="scheduled_date"
+              formControlName="scheduled_date"
             />
             <mat-datepicker-toggle
               matSuffix
