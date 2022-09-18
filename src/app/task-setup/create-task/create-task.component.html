@@ -1,0 +1,67 @@
+<h2  mat-dialog-title class="col-sm-12">
+    Create Task
+  </h2>
+  <!-- <h2 mat-dialog-title class="col-sm-12">
+    Edit Task
+  </h2> -->
+  <div mat-dialog-content>
+    <div [formGroup]="form">
+
+        <div class="row">
+
+            <mat-form-field class="col-sm-6">
+                <mat-label>Title&nbsp;<span style="color: red;">*</span></mat-label>
+                <input matInput type="text" formControlName="title"/>
+            </mat-form-field>
+          
+      
+          <mat-form-field class="col-sm-6">
+            <mat-label>Priority&nbsp;<span style="color: red;">*</span></mat-label>
+            <mat-select
+              formControlName="priority"
+            >
+              <mat-option [value]="1">1</mat-option>
+              <mat-option [value]="2">2</mat-option>
+              <mat-option [value]="3">3</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+      <div class="row">
+        <mat-form-field class="col-sm-12">
+            <input
+              matInput
+              placeholder="Scheduled Date"
+              [matDatepicker]="scheduleDatePicker"
+              [(ngModel)]="scheduled_date"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="scheduleDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #scheduleDatePicker></mat-datepicker>
+          </mat-form-field>
+    
+      </div>
+  
+      <br/>
+    </div>
+    <div class="col-sm-12">
+      <button
+        [disabled]="!form.valid"
+        type="button"
+        mat-flat-button
+        color="primary"
+        [mat-dialog-close]="form.value"
+        (click)="save()"
+      >
+        Save
+      </button>
+      &nbsp;
+      <button type="button" mat-flat-button color="accent" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </div>
+  

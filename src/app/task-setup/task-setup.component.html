@@ -1,0 +1,264 @@
+<div class="container task-container">
+    
+    <!-- <div class="row">
+        <div class="col-12 my-4">
+            <h4 class="font-weight-bold header-text text-center"><b>Task Management System</b></h4>
+        </div>
+    </div> -->
+    <mat-toolbar>
+        <span>Task Management System</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" [routerLink]="['/login']" (click)="logout()">
+          Logout
+        </button>
+      </mat-toolbar>
+
+    <div class="content">
+        <div class="row">
+
+            <div class="col-sm-10"></div>
+            <div class="col-sm-2">
+                <button
+                  style="float:right;"
+                  mat-flat-button
+                  color="primary"
+                  (click)="createTask()"
+                  class="search m-1"
+                >
+                  <mat-icon>add_circle_outline</mat-icon>
+                  New Task
+                </button>
+              </div>
+            
+              <div class="col-12">
+                <h6>All Tasks Table</h6><br />
+                <div class="table">
+                    <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="dataSource">
+
+                        <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef>
+                            Title
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{ row.title }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="scheduledDate">
+                            <mat-header-cell *matHeaderCellDef>
+                                Scheduled Date
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{ row.scheduled_date }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="completionDate">
+                            <mat-header-cell *matHeaderCellDef>
+                                Completion Date
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{ row.completion_date }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="priority">
+                            <mat-header-cell *matHeaderCellDef>
+                                Priority
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{ row.priority }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef>
+                                Actions
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> 
+                                <a
+                                title="UpdateStatus"
+                                class="btn" 
+                                (click)="updateStatus(row.id)"
+                                >
+                              
+                                <mat-icon color="accent">sync</mat-icon>
+                              </a>
+                                <a
+                                title="Edit"
+                                class="btn" 
+                                (click)="editTask(row.id)"
+                                >
+                              
+                                <mat-icon color="primary">create</mat-icon>
+                              </a>
+            
+                              <a
+                                title="Delete"
+                                class="btn"
+                                (click)="deleteConfirm(row)"
+                              >
+                              
+                                <mat-icon color="warn">delete</mat-icon>
+                              </a>
+                            </mat-cell>
+                        </ng-container>
+        
+                        <mat-header-row
+                        *matHeaderRowDef="displayedColumns; sticky: true;"
+                        ></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns">
+                        <!-- (click)="onRowClicked(row)" -->
+                        </mat-row>
+                    </mat-table>
+        
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-6">
+                <h6>Completed Task Table</h6><br />
+                <div class="table">
+                    <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="dataSourceComplete">
+
+                        <ng-container matColumnDef="title">
+                        <mat-header-cell *matHeaderCellDef>
+                            Title
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{ row.title }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="scheduledDate">
+                            <mat-header-cell *matHeaderCellDef>
+                                Scheduled Date
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{ row.scheduled_date }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="completionDate">
+                            <mat-header-cell *matHeaderCellDef>
+                                Completion Date
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{ row.completed_date }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="priority">
+                            <mat-header-cell *matHeaderCellDef>
+                                Priority
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{ row.priority }} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef>
+                                Actions
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> 
+                               
+                                <a
+                                title="Edit"
+                                class="btn" 
+                                (click)="editTask(row.id)"
+                                >
+                              
+                                <mat-icon color="primary">create</mat-icon>
+                              </a>
+            
+                              <a
+                                title="Delete"
+                                class="btn"
+                              >
+                              <!-- (click)="deleteConfirmWithId(row)" -->
+                                <mat-icon color="warn">delete</mat-icon>
+                              </a>
+                            </mat-cell>
+                        </ng-container>
+        
+                        <mat-header-row
+                        *matHeaderRowDef="displayedColumns; sticky: true;"
+                        ></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns">
+                        <!-- (click)="onRowClicked(row)" -->
+                        </mat-row>
+                    </mat-table>
+        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <h6>Incompleted Task Table</h6><br />
+                <div class="table">
+                    <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="dataSourceIncomplete">
+                        <ng-container matColumnDef="title">
+                            <mat-header-cell *matHeaderCellDef>
+                                Title
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{ row.title }} </mat-cell>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="scheduledDate">
+                                <mat-header-cell *matHeaderCellDef>
+                                    Scheduled Date
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{ row.scheduledDate }} </mat-cell>
+                            </ng-container>
+    
+                            <!-- <ng-container matColumnDef="completionDate">
+                                <mat-header-cell *matHeaderCellDef>
+                                    Completion Date
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{ row.completionDate }} </mat-cell>
+                            </ng-container> -->
+    
+                            <ng-container matColumnDef="priority">
+                                <mat-header-cell *matHeaderCellDef>
+                                    Priority
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let row"> {{ row.priority }} </mat-cell>
+                            </ng-container>
+    
+                            <ng-container matColumnDef="actions">
+                                <mat-header-cell *matHeaderCellDef>
+                                    Actions
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let row">  
+                                    <a
+                                title="UpdateStatus"
+                                class="btn" 
+                                (click)="updateStatus(row.id)"
+                                >
+                              
+                                <mat-icon color="accent">sync</mat-icon>
+                              </a>
+                              <a
+                              title="Edit"
+                              class="btn" 
+                              (click)="editTask(row.id)"
+                              >
+                            
+                              <mat-icon color="primary">create</mat-icon>
+                            </a>
+          
+                            <a
+                              title="Delete"
+                              class="btn"
+                            >
+                            <!-- (click)="deleteConfirmWithId(row)" -->
+                              <mat-icon color="warn">delete</mat-icon>
+                            </a>
+                                </mat-cell>
+                            </ng-container>
+        
+                        <mat-header-row
+                        *matHeaderRowDef="displayedColumns2; sticky: true;"
+                        ></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns2">
+                        <!-- (click)="onRowClicked(row)" -->
+                        </mat-row>
+                    </mat-table>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

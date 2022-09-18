@@ -1,0 +1,47 @@
+<h2  mat-dialog-title class="col-sm-12">
+    Update Status
+  </h2>
+  <!-- <h2 mat-dialog-title class="col-sm-12">
+    Edit Task
+  </h2> -->
+  <div mat-dialog-content>
+    <div [formGroup]="form">
+
+        <div class="row">
+
+          
+      
+          <mat-form-field class="col-sm-12">
+            <mat-label>Complete Task&nbsp;<span style="color: red;">*</span></mat-label>
+            <mat-select
+                [(ngModel)]="completeStatus"
+              formControlName="completed_status"
+            >
+              <mat-option value="yes">YES</mat-option>
+              <mat-option value="no">NO</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+        </div>
+
+  
+      <br/>
+    </div>
+    <div class="col-sm-12">
+      <button
+        [disabled]="!form.valid"
+        type="button"
+        mat-flat-button
+        color="primary"
+        [mat-dialog-close]="form.value"
+        (click)="save()"
+      >
+        Save
+      </button>
+      &nbsp;
+      <button type="button" mat-flat-button color="accent" (click)="cancel()">
+        Cancel
+      </button>
+    </div>
+  </div>
+  
